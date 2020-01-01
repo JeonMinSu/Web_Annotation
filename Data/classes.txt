@@ -1,0 +1,11 @@
+gun
+sword
+bow
+blunt
+axe
+spark
+burn
+blood
+person
+boobs
+buttocks

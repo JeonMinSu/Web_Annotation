@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>YOLO BBox Annotation Tool</title>
+
+        <link href="include/common/css/common.css" rel="stylesheet">
+
+        <script src="include/Js/Lib/canvas.min.js"></script>
+        <script src="include/Js/Lib/filesaver.min.js"></script>
+        <script src="include/Js/Lib/jszip.min.js"></script>
+        <script src="include/Js/Lib/jquery-3.4.1.min.js"></script>
+        <script src="include/Js/Lib/Observer.js"></script>
+        <script src="include/Js/Lib/utility.js"></script>        
+
+        <script src="include/Js/Constants/Constants.js"></script>
+        
+        <script src="include/Js/File_io/file.js"></script>
+        <script src="include/Js/File_io/yolo_io.js"></script>
+        <script src="include/Js/File_io/Pascal_io.js"></script>
+        <script src="include/Js/Canvas/draw_canvas.js"></script>
+        <script src="include/Js/BBox/BBox.js"></script>
+        <script src="include/Js/Classes/classes.js"></script>
+        <script src="include/Js/Model/ModelGraph.js"></script>
+        <script src="include/Js/File_io/MODEL_POST_io.js"></script>
+
+        <script src="include/Js/common.js"></script>
+    </head>
+    <body>
+        <div class="container" id="container">
+            <div class="left">
+                <div class="buttons_form">
+                    <div class="inputbox">
+                        <div class ="image_btn">
+                            <label for="prev_img" id="prev_img"> Prev <<<< </label>
+                            <label for="prev_img" id="next_img"> >>>> Next </label>
+                        </div>
+                        <div class="zoom_btn">
+                            <label for="zoom_out" id="zoom_out"> zoom - </label>
+                            <!-- <label for="fit_zoom" id="fit_zoom"> Fit Zoom </label> -->
+                            <label for="zoom_in" id="zoom_in"> zoom + </label>
+                        </div>
+                    </div>
+                    <div class="annotaion_ui" id="annotaion_ui">
+                        <div class="radio_btns">
+                            <div class="file_format_col">
+                                <input type="radio" id="Yolo" class="format_radio checked"  name="format" value="YOLO" checked>
+                                <label for="Yolo">YOLO</label>
+                            </div>
+                            <div class="file_format_col">
+                                <input type="radio" id="Pascal" class="format_radio" name="format" value="VOC">
+                                <label for="Pascal">VOC</label>
+                            </div>
+                            <div class="file_format_col ">
+                                <input type="radio" id="All" class="format_radio" name="format" value="ALL">
+                                <label for="All">ALL</label>
+                            </div>
+                        </div>
+                        <div class="save_btn">
+                            <input type="button" name="save" id="save" value="Save" />
+                        </div>
+                        <div class="bbox_load" id="bbox_load">
+                            <label for="file_load">BBOX Load</label>
+                            <input type="file" id="file_load" name="files[]" accept="text/plain, application/zip" disabled multiple />
+                        </div>
+                    </div> 
+                    <div class="model_list" id="model_list">
+                        <label for="model_sel">Model List </label>
+                        <select name="model_sel" id="model_sel">
+                            <option value="RCNN,SSD_Mobilenet_V2_Ship_V1">SSD</option>
+                            <option value="YOLO,YOLO_V3_Game_V1">YOLO</option>
+                            <!-- <option value="BR,BR_Game_V1">Blood</option> -->
+                        </select>
+                    </div>                  
+                    <div class="checkbox_btns">
+                        <div class="model_load_col">
+                            <input type="checkbox" id="MD_Load" class="model_load"  name="model_load" value="Load" disabled>
+                            <label for="MD_Load">Model Load</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="center" id="center">
+                <canvas id="canvas"></canvas>
+            </div>
+
+            <div class="right">
+
+                <div class="search_bnt">
+                    <label for="imageSearch">Image Search</label>
+                    <input type="search" id="imageSearch" name="imageSearch" />
+                </div>
+                
+                <div class="load_btn">
+                    <label for="images">Image Load</label>
+                    <input type="file" id="images" name="iamges[]" accept="image/jpeg, image/png" multiple /> 
+                </div>
+
+                <div class="load_list" id="imageForm">
+                    <label for="imageList">Image List </label>
+                    <select name="imageList" id="imageList"></select>
+                    <div id="imageInformation"></div>
+                </div>
+                
+                <div class="load_btn">
+                    <label for="classes">Label Load</label>
+                    <input type="file" id="classes" name="classes" accept="text/plain" />
+                </div>
+
+                <div class="load_list" id="classesForm">
+                    <label for="classList">Label List </label>
+                    <select name="classList" id="classList"></select>
+                    <div class="defualt_class">
+                        <label for="defualt_class">Use Defualt Class </label>
+                        <input type="text" id="defualt_class" name="defualt_class" />
+                    </div>
+                    <div id="bboxInformation"></div>
+                </div>
+                <div class="graph" id="graph">
+                    <ul id="g_cols">
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
